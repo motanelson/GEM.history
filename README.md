@@ -203,4 +203,34 @@ This explains why the Atari ST could boot into a graphical environment so quickl
 
 ---
 
+7. So, where did it first appear?
+
+There are two answers that need to be distinguished:
+
+GEM as a product: it originated at Digital Research and was released in February 1985.
+
+GEM as a particularly famous commercial computing platform: it appeared on the Atari ST (released in 1985), where it became the graphical interface for TOS.
+
+In other words:
+
+Digital Research
+       │
+       │ develops GEM
+       ▼
+     GEM
+       │
+       ├──── PC / MS-DOS
+       │
+       └──── Atari
+               │
+               ▼
+             TOS
+               │
+               ▼
+           Atari ST
+
+And there is an interesting historical footnote: GEM was influenced by the graphical tradition of Xerox PARC and ended up looking enough like the Macintosh for Apple to challenge certain aspects of its "look and feel"; this led to changes in the PC versions.
+
+If you want to understand it at the memory level, the next interesting step is to take apart an Atari ST.
+
 
