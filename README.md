@@ -108,4 +108,99 @@ When a window was revealed, the system could ask the application to redraw the n
 ---
 
 
+4. How did program switching work?
+
+Here, one must be careful to note a historical difference.
+
+GEM did not operate like modern Windows NT or Windows, where each application runs in a protected process and the kernel can interrupt it at any moment.
+
+In the classic GEM environment—especially on the Atari ST—execution was essentially cooperative.
+
+We can visualize it like this:
+
+GEM
+                  │
+        ┌─────────┴─────────┐
+        │                   │
+        ▼                   ▼
+    Program A           Program B
+        │                   │
+        └──── yields ───────┘
+             control
+
+Switching applications depended on how the environment and the applications cooperated.
+
+Therefore:
+
+switching windows ≠ necessarily switching processes, as in modern Windows.
+
+
+---
+
+5. What about memory?
+
+This is where there is a huge difference between GEM/Atari ST and modern Windows.
+
+The Atari ST's Motorola 68000 processor had a much larger address space than the 8086, and TOS used a linear memory model.
+
+For example, on an ST with 512 KB:
+
+Memory
+000000 ┌──────────────────┐
+       │ TOS / system     │
+       ├──────────────────┤
+       │ GEM              │
+       ├──────────────────┤
+       │ Desktop          │
+       ├──────────────────┤
+       │ application      │
+       ├──────────────────┤
+       │ data / heap      │
+       ├──────────────────┤
+       │ other application│
+       └──────────────────┘
+
+This representation is conceptual; it does not mean that every ST had exactly this layout.
+
+The key point is that you didn't have the modern model:
+
+Program A → isolated virtual space
+Program B → isolated virtual space
+
+with full memory protection.
+
+This meant that a poorly behaved program could cause problems for the system or for other applications.
+
+
+---
+
+6. GEM on the Atari ST was even more interesting
+
+For the Atari ST, Atari adapted GEM for the Motorola 68000.
+
+Development of this version began in 1984, when Atari engineers went to work with Digital Research.  Initially, the plan was to use CP/M-68K, but Atari ultimately used GEMDOS—a DOS-like layer—and named the complete system TOS (The Operating System).
+
+The structure looked roughly like this:
+
+APPLICATION
+                 │
+        ┌────────┴────────┐
+        │                 │
+       AES               VDI
+        │                 │
+        └────────┬────────┘
+                 │
+              GEMDOS
+                 │
+                 ▼
+                TOS
+                 │
+                 ▼
+            Motorola 68000
+
+This explains why the Atari ST could boot into a graphical environment so quickly: in later ST models, TOS was actually stored in ROM.
+
+
+---
+
 
